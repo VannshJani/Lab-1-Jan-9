@@ -1,3 +1,6 @@
+'''
+This code is used to create an animation of a sudoku being solved.
+'''
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
