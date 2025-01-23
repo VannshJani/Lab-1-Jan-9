@@ -79,13 +79,11 @@ def animate_sudoku(all_boards):
         ax.set_yticks([i + 0.5 for i in range(9)], minor=True)
         ax.grid(which="minor", color="black", linestyle='-', linewidth=2)
         ax.imshow([[5]*9]*9, cmap="Blues", vmin=0, vmax=9)
-        
         for i in range(9):
             for j in range(9):
                 num = all_boards[frame][i][j]
                 if num != 0:
                     ax.text(j, i, str(num), ha="center", va="center", color="black")
-        
         ax.set_xticks([])
         ax.set_yticks([])
 
