@@ -2,7 +2,7 @@
 This code is used to create an animation of a sudoku being solved.
 '''
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation 
+import matplotlib.animation as animation
 
 test_board = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
