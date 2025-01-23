@@ -1,12 +1,28 @@
 '''
 This code is used to create an animation of a sudoku being solved.
 '''
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+import matplotlib.pyplot as plt # type: ignore
+import matplotlib.animation as animation # type: ignore
+
+board = [
+    [5, 3, 0, 0, 7, 0, 0, 0, 0],
+    [6, 0, 0, 1, 9, 5, 0, 0, 0],
+    [0, 9, 8, 0, 0, 0, 0, 6, 0],
+    [8, 0, 0, 0, 6, 0, 0, 0, 3],
+    [4, 0, 0, 8, 0, 3, 0, 0, 1],
+    [7, 0, 0, 0, 2, 0, 0, 0, 6],
+    [0, 6, 0, 0, 0, 0, 2, 8, 0],
+    [0, 0, 0, 4, 1, 9, 0, 0, 5],
+    [0, 0, 0, 0, 8, 0, 0, 7, 9]
+]
+all_boards = []
 
 def is_valid(board, row, col, num):
+    '''
+    Check if the number can be placed in the cell
+    '''
     for i in range(9):
-        if board[row][i] == num or board[i][col] == num:
+        if num in (board[row][i], board[i][col]):
             return False
 
     start_row, start_col = 3 * (row // 3), 3 * (col // 3)
@@ -17,6 +33,9 @@ def is_valid(board, row, col, num):
     return True
 
 def find_mrv(board):
+    '''
+    Find the cell with the minimum remaining values
+    '''
     min_count = 10
     mrv_position = (-1, -1)
     for row in range(9):
@@ -30,9 +49,10 @@ def find_mrv(board):
     # print("MRV Position:", mrv_position)
     return mrv_position
 
-all_boards = []
-
 def solve_sudoku(board):
+    '''
+    Solve the Sudoku board using backtracking
+    '''
     all_boards.append([row[:] for row in board])
     empty = find_mrv(board)
     if empty == (-1, -1):
@@ -51,19 +71,6 @@ def solve_sudoku(board):
 def print_board(board):
     for row in board:
         print(" ".join(str(num) if num != 0 else '.' for num in row))
-
-# Example Sudoku board with 0 representing empty cells
-board = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
 
 if solve_sudoku(board):
     print("Solved Sudoku Board:")
