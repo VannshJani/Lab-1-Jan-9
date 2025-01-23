@@ -4,7 +4,7 @@ This code is used to create an animation of a sudoku being solved.
 import matplotlib.pyplot as plt # type: ignore
 import matplotlib.animation as animation # type: ignore
 
-board = [
+test_board = [
     [5, 3, 0, 0, 7, 0, 0, 0, 0],
     [6, 0, 0, 1, 9, 5, 0, 0, 0],
     [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -15,7 +15,7 @@ board = [
     [0, 0, 0, 4, 1, 9, 0, 0, 5],
     [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ]
-all_boards = []
+total_boards = []
 
 def is_valid(board, row, col, num):
     '''
@@ -53,7 +53,7 @@ def solve_sudoku(board):
     '''
     Solve the Sudoku board using backtracking
     '''
-    all_boards.append([row[:] for row in board])
+    total_boards.append([row[:] for row in board])
     empty = find_mrv(board)
     if empty == (-1, -1):
         return True
@@ -69,18 +69,24 @@ def solve_sudoku(board):
     return False
 
 def print_board(board):
+    '''
+    Print the Sudoku board
+    '''
     for row in board:
         print(" ".join(str(num) if num != 0 else '.' for num in row))
 
-if solve_sudoku(board):
+if solve_sudoku(test_board):
     print("Solved Sudoku Board:")
-    print_board(board)
-    print("Number of boards:", len(all_boards))
+    print_board(test_board)
+    print("Number of boards:", len(total_boards))
 else:
     print("No solution exists.")
 
 
 def animate_sudoku(all_boards):
+    '''
+    Function to animate the Sudoku board
+    '''
     fig, ax = plt.subplots()
 
     def update(frame):
@@ -101,4 +107,4 @@ def animate_sudoku(all_boards):
     ani.save("sudoku_animation.gif", writer="imagemagick")
     plt.show()
 
-animate_sudoku(all_boards)
+animate_sudoku(total_boards)
